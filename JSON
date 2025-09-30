@@ -1,0 +1,15 @@
+[
+{
+"id": "ps_id",
+"name": "ПС наименование",
+"lat": 45.000,
+"lon": 38.000,
+"address": "адрес",
+"slotsU": 20,
+"slotsUFree": 12,
+"powerKW": 6,
+"powerFreeKW": 3,
+"contacts": "noc@rkuban.ru",
+"link": "mailto:noc@rkuban.ru?subject=Заявка%20на%20колокейшн%20[ПС]"
+}
+]
