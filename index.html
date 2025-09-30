@@ -1,0 +1,66 @@
+<!doctype html>
+map.fitBounds(bounds.pad(0.2));
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19}).addTo(map);
+
+const markers = [];
+const listEl = document.getElementById('list');
+const statsEl = document.getElementById('stats');
+const onlyAvail = document.getElementById('onlyAvail');
+
+function computeStats(data){
+const total = data.length;
+const free = data.filter(p=>p.slotsUFree>0 && p.powerFreeKW>0).length;
+const sumUFree = data.reduce((a,b)=>a+b.slotsUFree,0);
+const sumKWFree = data.reduce((a,b)=>a+b.powerFreeKW,0);
+statsEl.innerHTML = `
+<span class="chip">ПС: <b>${total}</b></span>
+<span class="chip">Доступных площадок: <b>${free}</b></span>
+<span class="chip">Свободно U: <b>${sumUFree}</b></span>
+<span class="chip">Свободно кВт: <b>${sumKWFree.toFixed(1)}</b></span>`;
+}
+
+function render(data){
+listEl.innerHTML='';
+markers.forEach(m=>map.removeLayer(m));
+markers.length=0;
+
+data.forEach(p=>{
+const avail = p.slotsUFree>0 && p.powerFreeKW>0;
+const m = L.circleMarker([p.lat,p.lon],{radius:8,weight:1,opacity:0.9,fillOpacity:0.9,color: avail? '#00AEEF':'#9aa7c0', fillColor: avail? '#00AEEF':'#9aa7c0'}).addTo(map);
+m.bindPopup(`<b>${p.name}</b><br>${p.address}<br>Свободно: ${p.slotsUFree}U / ${p.powerFreeKW} кВт`);
+markers.push(m);
+
+const card = document.createElement('div');
+card.className='card';
+card.innerHTML = `
+<h4>${p.name}</h4>
+<div class="muted">${p.address}</div>
+<div class="muted">Свободно: <b>${p.slotsUFree}U</b> · <b>${p.powerFreeKW} кВт</b></div>
+<div style="display:flex;gap:8px;margin-top:8px">
+<a class="btn" href="${p.link}">Отправить заявку</a>
+<button class="btn" onclick="copySpec('${p.id}')">Паспорт площадки</button>
+</div>`;
+listEl.appendChild(card);
+});
+
+computeStats(data);
+}
+
+function copySpec(id){
+const p = psData.find(x=>x.id===id);
+const text = `Площадка: ${p.name}\nАдрес: ${p.address}\nДоступно: ${p.slotsUFree}U, ${p.powerFreeKW} кВт\nКонтакты: ${p.contacts}`;
+navigator.clipboard.writeText(text).then(()=>{
+alert('Паспорт площадки скопирован в буфер обмена');
+});
+}
+
+function apply(){
+const data = psData.filter(p=> !onlyAvail.checked || (p.slotsUFree>0 && p.powerFreeKW>0));
+render(data);
+}
+
+onlyAvail.addEventListener('change',apply);
+apply();
+</script>
+</body>
+</html>
