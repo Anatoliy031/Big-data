@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Интерактивная карта подстанций</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #002d62;
+      color: #fff;
+      padding: 30px 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    main {
+      padding: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    #map img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+    #list {
+      margin-top: 20px;
+    }
+    #list ul {
+      list-style: none;
+      padding: 0;
+    }
+    #list li {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      margin-bottom: 8px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.2s ease;
+    }
+    #list li:hover {
+      background: #f0f3f8;
+    }
+    #details {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: #f9fbfd;
+    }
+    #details h2 {
+      margin-top: 0;
+      color: #002d62;
+    }
+    .back {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 15px;
+      background: #0070c0;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Интерактивная карта подстанций и слотов</h1>
+  </header>
+  <main>
+    <p>На этой странице представлена абстрактная карта зоны обслуживания и список доступных подстанций с количеством свободных слотов. Нажмите на название подстанции, чтобы увидеть подробности.</p>
+    <section id="map">
+      <img src="1917646a-0382-46ff-9afa-75b04419c005.png" alt="Абстрактная карта">
+    </section>
+    <section id="list">
+      <h2>Список подстанций</h2>
+      <ul id="substationList"></ul>
+    </section>
+    <section id="details">
+      <h2>Выберите подстанцию</h2>
+      <p>Подробная информация о подстанции появится здесь после выбора.</p>
+    </section>
+    <a class="back" href="index.html">Вернуться на главную</a>
+  </main>
+  <script>
+    const substations = [
+      {
+        name: 'ПС «Краснодарская 220»',
+        location: 'Краснодар',
+        slots: 5,
+        description: 'Расположена вблизи транспортной развязки. Доступно 5 слотов для размещения оборудования.'
+      },
+      {
+        name: 'ПС «Сочинская 110»',
+        location: 'Сочи',
+        slots: 3,
+        description: 'Поблизости магистральные каналы и дата‑центры. Доступно 3 слота.'
+      },
+      {
+        name: 'ПС «Анапская 330»',
+        location: 'Анапа',
+        slots: 4,
+        description: 'Рядом с портом Анапа. Доступно 4 слота для компактных стоек.'
+      },
+      {
+        name: 'ПС «Новороссийск 220»',
+        location: 'Новороссийск',
+        slots: 2,
+        description: 'В зоне промышленного узла. Доступно 2 слота – рекомендуется раннее бронирование.'
+      },
+      {
+        name: 'ПС «Армавирская 110»',
+        location: 'Армавир',
+        slots: 6,
+        description: 'Сельскохозяйственный кластер. Доступно 6 слотов; оптимально для резервных узлов.'
+      }
+    ];
+
+    const listElement = document.getElementById('substationList');
+    const detailsElement = document.getElementById('details');
+
+    function renderList() {
+      substations.forEach((substation, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${substation.name} – свободно ${substation.slots} слотов`;
+        li.addEventListener('click', () => showDetails(index));
+        listElement.appendChild(li);
+      });
+    }
+
+    function showDetails(index) {
+      const s = substations[index];
+      detailsElement.innerHTML = '';
+      const title = document.createElement('h2');
+      title.textContent = s.name;
+      const location = document.createElement('p');
+      location.innerHTML = '<strong>Местоположение:</strong> ' + s.location;
+      const slots = document.createElement('p');
+      slots.innerHTML = '<strong>Свободные слоты:</strong> ' + s.slots;
+      const descr = document.createElement('p');
+      descr.textContent = s.description;
+      detailsElement.appendChild(title);
+      detailsElement.appendChild(location);
+      detailsElement.appendChild(slots);
+      detailsElement.appendChild(descr);
+    }
+
+    document.addEventListener('DOMContentLoaded', renderList);
+  </script>
+</body>
+</html>
