@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дорожная карта внедрения</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#0b1a33; --panel:#0f2547; --accent:#1e88e5; --accent-2:#42a5f5;
+  --ink:#e9f2ff; --muted:#b7c9e9; --card:#0e213f;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif}
+a{color:var(--accent);text-decoration:none} a:hover{color:var(--accent-2)}
+.container{max-width:1100px;margin:0 auto;padding:24px}
+.header{position:sticky;top:0;z-index:50;background:rgba(11,26,51,.75);backdrop-filter: blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 16px;border-radius:14px;background:linear-gradient(180deg,#1e88e5,#1769aa);color:#fff;font-weight:600;box-shadow:0 8px 20px rgba(30,136,229,.25);transition:transform .15s ease, box-shadow .2s ease, background .2s ease;}
+.btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(66,165,245,.28);background:linear-gradient(180deg,#2196f3,#1976d2)}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--ink)}
+.h1{font-size:clamp(28px,3.5vw,42px);line-height:1.1;margin:8px 0 4px}
+.lead{color:var(--muted);max-width:820px;margin:0 auto 18px auto;font-weight:500}
+.hero{padding:28px 0 18px;background:
+  radial-gradient(1000px 600px at 100% -10%, rgba(66,165,245,.2), transparent 60%),
+  radial-gradient(800px 500px at -10% 110%, rgba(30,136,229,.22), transparent 60%),
+  linear-gradient(180deg, #0b1a33 0%, #0a1630 60%, #071225 100%);text-align:center}
+.grid{display:grid;gap:18px}
+.cards{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:linear-gradient(180deg,#0e213f,#0d1e39);border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:18px;box-shadow:0 10px 30px rgba(7,18,37,.35)}
+.card h3{margin:6px 0 10px 0}
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{border-bottom:1px solid rgba(255,255,255,.06);padding:10px 8px;text-align:left}
+.table th{color:#cfe1ff;background:rgba(255,255,255,.03)}
+.small{font-size:.92rem;color:#c6d7f7}
+.footer{border-top:1px solid rgba(255,255,255,.06);text-align:center;padding:22px;color:#b7c9e9;background:rgba(11,26,51,.6)}
+.note{background:rgba(255,255,255,.06);border:1px dashed rgba(255,255,255,.2);padding:12px;border-radius:12px}
+.raci-explain{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:10px 0 16px}
+.raci-explain .pill{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px}
+.hr{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);margin:20px 0}
+</style></head>
+<body>
+<header class="header"><div class="container hero">
+  <h1 class="h1">Дорожная карта внедрения</h1>
+  <p class="lead">От подготовки до масштабирования. Контрольные точки, KPI и роли по RACI.</p>
+  <div class="nav"><a class="btn" href="index.html">На главную</a></div>
+</div></header>
+<main class="container">
+  <section class="card">
+    <h3>Фаза 0. Подготовка (≈ 1 месяц)</h3>
+    <ul class="small">
+      <li>Бизнес‑кейс: спрос, конкуренты, CAPEX/OPEX.</li>
+      <li>Команда проекта и матрица RACI.</li>
+      <li>Отбор 3–5 пилотных ПС; обследование помещений и мощностей.</li>
+      <li>Концепция «белой зоны»: питание, климат, заземление, контуры.</li>
+      <li>Документы: регламент услуги, типовой договор, SLA, регламент доступа, политика безопасности.</li>
+      <li>Согласования по блокам; бюджет пилота; обучение.</li>
+    </ul>
+    <p class="small"><b>Контрольная точка</b>: документы утверждены; пилотные ПС и бюджеты согласованы; команда сформирована.</p>
+  </section>
+
+  <section class="card">
+    <h3>Фаза 1. Пилотирование (1–2 месяц)</h3>
+    <ul class="small">
+      <li>Закупка стоек, PDU, ODF, кондиционирования, видеонаблюдения, СКУД.</li>
+      <li>Подготовка помещения, трассы, заземление/ШУП.</li>
+      <li>Монтаж и кросс‑подключения; настройка мониторинга.</li>
+      <li>Процедуры доступа и аварийные сценарии; сопровождение.</li>
+      <li>Первые клиенты‑операторы; совместный монтаж; обратная связь.</li>
+    </ul>
+    <p class="small"><b>Контрольная точка</b>: «белая зона» работает; процедуры проверены; первый клиент подтверждён.</p>
+  </section>
+
+  <section class="card">
+    <h3>Фаза 2. Запуск (3‑й месяц)</h3>
+    <ul class="small">
+      <li>КП, презентации, FAQ; первые договоры (≥2).</li>
+      <li>Тарификация по юнитам, мощности (кВт), кроссам и «удалённой помощи инженера».</li>
+      <li>Сервис‑деск: <b>система автоматизации заявок</b>, учёт SLA, каталог услуг.</li>
+      <li>Приёмка работ и обновление схем размещения.</li>
+    </ul>
+    <p class="small"><b>Контрольная точка</b>: ≥ 2 оператора пользуются услугой; процессы и биллинг стабильны.</p>
+  </section>
+
+  <section class="card">
+    <h3>Фаза 3. Масштабирование (Квартал 2+)</h3>
+    <ul class="small">
+      <li>Стандартизация и тиражирование на 15–20 ПС.</li>
+      <li>Сквозная автоматизация (без CRM): портал заявок и биллинг.</li>
+      <li>Доп. опции: резерв питания/каналов, мониторинг датчиков, −48 В, быстрая замена.</li>
+      <li>Мониторинг энергии и климата с доступом клиентов к своим показателям.</li>
+    </ul>
+    <p class="small"><b>Контрольная точка</b>: услуга тиражирована; автоматизация и биллинг работают; доп. опции запущены.</p>
+  </section>
+
+  <section class="card">
+    <h3>Матрица RACI</h3>
+    <div class="raci-explain small">
+      <div class="pill"><b>R — Responsible (исполняет)</b>: кто непосредственно выполняет задачу.</div>
+      <div class="pill"><b>A — Accountable (несёт ответственность)</b>: кто принимает окончательное решение и отвечает за результат.</div>
+      <div class="pill"><b>C — Consulted (консультирует)</b>: кого привлекают за советом до выполнения задачи.</div>
+      <div class="pill"><b>I — Informed (информируется)</b>: кого держат в курсе хода и результатов.</div>
+    </div>
+    <table class="table small">
+      <thead><tr><th>Функция</th><th>Владелец услуги</th><th>Тех. блок</th><th>Эксплуатация</th><th>Режим/Безопасность</th><th>Юристы</th><th>Финансы</th></tr></thead>
+      <tbody>
+        <tr><td>Тарифы и продажи</td><td>R/A</td><td>C</td><td>I</td><td>I</td><td>C</td><td>R</td></tr>
+        <tr><td>Технический дизайн</td><td>C</td><td>R/A</td><td>C</td><td>I</td><td>I</td><td>I</td></tr>
+        <tr><td>Эксплуатация</td><td>I</td><td>C</td><td>R/A</td><td>C</td><td>I</td><td>C</td></tr>
+        <tr><td>Доступ и охрана</td><td>I</td><td>I</td><td>C</td><td>R/A</td><td>I</td><td>I</td></tr>
+        <tr><td>Договоры</td><td>I</td><td>I</td><td>I</td><td>I</td><td>R/A</td><td>C</td></tr>
+        <tr><td>Биллинг/отчётность</td><td>C</td><td>I</td><td>C</td><td>I</td><td>C</td><td>R/A</td></tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+<footer class="footer">© 2025</footer>
+</body></html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Термины и законодательство</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#0b1a33; --panel:#0f2547; --accent:#1e88e5; --accent-2:#42a5f5;
+  --ink:#e9f2ff; --muted:#b7c9e9; --card:#0e213f;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif}
+a{color:var(--accent);text-decoration:none} a:hover{color:var(--accent-2)}
+.container{max-width:1100px;margin:0 auto;padding:24px}
+.header{position:sticky;top:0;z-index:50;background:rgba(11,26,51,.75);backdrop-filter: blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 16px;border-radius:14px;background:linear-gradient(180deg,#1e88e5,#1769aa);color:#fff;font-weight:600;box-shadow:0 8px 20px rgba(30,136,229,.25);transition:transform .15s ease, box-shadow .2s ease, background .2s ease;}
+.btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(66,165,245,.28);background:linear-gradient(180deg,#2196f3,#1976d2)}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--ink)}
+.h1{font-size:clamp(28px,3.5vw,42px);line-height:1.1;margin:8px 0 4px}
+.lead{color:var(--muted);max-width:820px;margin:0 auto 18px auto;font-weight:500}
+.hero{padding:28px 0 18px;background:
+  radial-gradient(1000px 600px at 100% -10%, rgba(66,165,245,.2), transparent 60%),
+  radial-gradient(800px 500px at -10% 110%, rgba(30,136,229,.22), transparent 60%),
+  linear-gradient(180deg, #0b1a33 0%, #0a1630 60%, #071225 100%);text-align:center}
+.grid{display:grid;gap:18px}
+.cards{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:linear-gradient(180deg,#0e213f,#0d1e39);border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:18px;box-shadow:0 10px 30px rgba(7,18,37,.35)}
+.card h3{margin:6px 0 10px 0}
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{border-bottom:1px solid rgba(255,255,255,.06);padding:10px 8px;text-align:left}
+.table th{color:#cfe1ff;background:rgba(255,255,255,.03)}
+.small{font-size:.92rem;color:#c6d7f7}
+.footer{border-top:1px solid rgba(255,255,255,.06);text-align:center;padding:22px;color:#b7c9e9;background:rgba(11,26,51,.6)}
+.note{background:rgba(255,255,255,.06);border:1px dashed rgba(255,255,255,.2);padding:12px;border-radius:12px}
+.raci-explain{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:10px 0 16px}
+.raci-explain .pill{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px}
+.hr{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);margin:20px 0}
+</style></head>
+<body>
+<header class="header"><div class="container hero">
+  <h1 class="h1">Термины и законодательство</h1>
+  <p class="lead">Понятный глоссарий и <span class="note">человеческая</span> система ссылок на нормы.</p>
+  <div class="nav"><a class="btn" href="index.html">На главную</a></div>
+</div></header>
+<main class="container">
+  <div class="card">
+    <h3>Колокейшн</h3>
+    <p><b>Колокейшн</b> — размещение оборудования клиента в выделенной «белой зоне» сетевой компании с обеспечением стойкомест, электропитания, микроклимата, кросс‑подключений и регламентированного доступа. Зона физически и организационно отделена от технологических систем (АСУ ТП, РЗА).</p>
+  </div>
+
+  <div class="grid cards" style="margin-top:14px">
+    <section class="card">
+      <h3>Сокращения</h3>
+      <ul class="small">
+        <li><b>АСУ ТП</b> — автоматизированная система управления технологическим процессом.</li>
+        <li><b>КИИ</b> — критически важная информационная инфраструктура.</li>
+        <li><b>ODF</b> — оптический распределительный кросс.</li>
+        <li><b>PDU</b> — блок распределения питания.</li>
+        <li><b>UPS</b> — источник бесперебойного питания.</li>
+        <li><b>SLA</b> — соглашение об уровне сервиса.</li>
+        <li><b>ПУЭ/ПТЭЭП</b> — правила устройства/эксплуатации электроустановок.</li>
+        <li><b>RACI</b> — матрица ответственности (см. «Дорожная карта»).</li>
+      </ul>
+    </section>
+    <section class="card">
+      <h3>Как мы цитируем законы</h3>
+      <p class="small">Вместо внутренних кодов вроде <span class="note">3300138315560 L37–L47</span> используем формат <b>[номер]</b> со списком источников ниже. Пример: «хранение данных — до шести месяцев <b>[1]</b>».</p>
+    </section>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h3>Ключевые нормы (кратко)</h3>
+    <ul class="small">
+      <li>126‑ФЗ «О связи»: хранение данных и взаимодействие с органами <b>[1]</b>.</li>
+      <li>Поправки 374‑ФЗ/375‑ФЗ («пакет Яровой»): сроки хранения <b>[2]</b>.</li>
+      <li>ПП РФ №445: правила хранения сообщений и условия использования чужих мощностей <b>[3]</b>.</li>
+      <li>152‑ФЗ «О персональных данных»: согласие, уведомление Роскомнадзора, локализация <b>[4]</b>.</li>
+      <li>149‑ФЗ «Об информации…»: обязанности ОРИ <b>[5]</b>.</li>
+      <li>187‑ФЗ «О безопасности КИИ»: категорирование и меры защиты <b>[6]</b>.</li>
+      <li>ПП РФ №2106: доступ к инфраструктуре энергетиков <b>[7]</b>.</li>
+    </ul>
+  </div>
+
+  <div class="note small" style="margin-top:12px">
+    <b>Источники</b>:
+    <ol>
+      <li><a href="https://ru.wikisource.org/wiki/Федеральный_закон_от_07.07.2003_№_126-ФЗ" target="_blank">126‑ФЗ</a></li>
+      <li><a href="https://ru.wikisource.org/wiki/Федеральный_закон_от_06.07.2016_№_374-ФЗ" target="_blank">374‑ФЗ</a>, <a href="https://ru.wikisource.org/wiki/Федеральный_закон_от_06.07.2016_№_375-ФЗ" target="_blank">375‑ФЗ</a></li>
+      <li><a href="https://government.ru/docs/32348/" target="_blank">ПП РФ №445</a></li>
+      <li><a href="https://letters.kremlin.ru/info-service/acts/9" target="_blank">152‑ФЗ</a></li>
+      <li><a href="https://www.consultant.ru/document/cons_doc_LAW_61798/" target="_blank">149‑ФЗ</a></li>
+      <li><a href="https://www.consultant.ru/document/cons_doc_LAW_220885/" target="_blank">187‑ФЗ</a></li>
+      <li><a href="https://www.consultant.ru/document/cons_doc_LAW_432115/" target="_blank">ПП РФ №2106</a></li>
+    </ol>
+  </div>
+</main>
+<footer class="footer">© 2025</footer>
+</body></html>
