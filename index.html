@@ -1,73 +1,385 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Колокейшн на подстанциях — витрина услуги</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
-<style>
-:root{
-  --bg:#0b1a33; --panel:#0f2547; --accent:#1e88e5; --accent-2:#42a5f5;
-  --ink:#e9f2ff; --muted:#b7c9e9; --card:#0e213f;
-}
-*{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif}
-a{color:var(--accent);text-decoration:none} a:hover{color:var(--accent-2)}
-.container{max-width:1100px;margin:0 auto;padding:24px}
-.header{position:sticky;top:0;z-index:50;background:rgba(11,26,51,.75);backdrop-filter: blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
-.nav{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:12px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 16px;border-radius:14px;background:linear-gradient(180deg,#1e88e5,#1769aa);color:#fff;font-weight:600;box-shadow:0 8px 20px rgba(30,136,229,.25);transition:transform .15s ease, box-shadow .2s ease, background .2s ease;}
-.btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(66,165,245,.28);background:linear-gradient(180deg,#2196f3,#1976d2)}
-.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--ink)}
-.h1{font-size:clamp(28px,3.5vw,42px);line-height:1.1;margin:8px 0 4px}
-.lead{color:var(--muted);max-width:820px;margin:0 auto 18px auto;font-weight:500}
-.hero{padding:28px 0 18px;background:
-  radial-gradient(1000px 600px at 100% -10%, rgba(66,165,245,.2), transparent 60%),
-  radial-gradient(800px 500px at -10% 110%, rgba(30,136,229,.22), transparent 60%),
-  linear-gradient(180deg, #0b1a33 0%, #0a1630 60%, #071225 100%);text-align:center}
-.grid{display:grid;gap:18px}
-.cards{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-.card{background:linear-gradient(180deg,#0e213f,#0d1e39);border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:18px;box-shadow:0 10px 30px rgba(7,18,37,.35)}
-.card h3{margin:6px 0 10px 0}
-.table{width:100%;border-collapse:collapse}
-.table th,.table td{border-bottom:1px solid rgba(255,255,255,.06);padding:10px 8px;text-align:left}
-.table th{color:#cfe1ff;background:rgba(255,255,255,.03)}
-.small{font-size:.92rem;color:#c6d7f7}
-.footer{border-top:1px solid rgba(255,255,255,.06);text-align:center;padding:22px;color:#b7c9e9;background:rgba(11,26,51,.6)}
-.note{background:rgba(255,255,255,.06);border:1px dashed rgba(255,255,255,.2);padding:12px;border-radius:12px}
-.raci-explain{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:10px 0 16px}
-.raci-explain .pill{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px}
-.hr{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);margin:20px 0}
-</style></head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Колокейшн на подстанциях | АО «Россети Кубань»</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --primary-color: #1a237e;
+      --secondary-color: #3949ab;
+      --accent-color: #00acc1;
+      --text-light: #ffffff;
+      --text-dark: #212121;
+      --bg-dark: #0d1117;
+      --bg-card: #161b22;
+      --gradient-1: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+      --gradient-2: linear-gradient(135deg, #00acc1 0%, #26c6da 100%);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: #0a0e27;
+      color: var(--text-light);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    
+    /* Анимированный фон */
+    .bg-animation {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      background: linear-gradient(to bottom, #0a0e27 0%, #1a237e 100%);
+      overflow: hidden;
+    }
+    
+    .bg-animation::before {
+      content: '';
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      background: radial-gradient(circle at 20% 80%, rgba(0, 172, 193, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(57, 73, 171, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 40%, rgba(26, 35, 126, 0.3) 0%, transparent 50%);
+      animation: float 20s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(-30px, -30px) rotate(120deg); }
+      66% { transform: translate(30px, -20px) rotate(240deg); }
+    }
+    
+    /* Хедер */
+    header {
+      position: relative;
+      padding: 80px 20px;
+      text-align: center;
+      background: rgba(26, 35, 126, 0.1);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ffffff 0%, #00acc1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 2px 20px rgba(0, 172, 193, 0.3);
+    }
+    
+    header p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* Электрическая сетка анимация */
+    .electric-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+    
+    .electric-line {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #00acc1, transparent);
+      animation: electric 3s linear infinite;
+    }
+    
+    .electric-line:nth-child(1) { top: 20%; width: 60%; left: -60%; animation-duration: 4s; }
+    .electric-line:nth-child(2) { top: 50%; width: 80%; right: -80%; animation-duration: 5s; animation-direction: reverse; }
+    .electric-line:nth-child(3) { top: 80%; width: 70%; left: -70%; animation-duration: 3.5s; }
+    
+    @keyframes electric {
+      to { transform: translateX(200%); }
+    }
+    
+    /* Основной контент */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .intro {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 40px;
+      background: rgba(22, 27, 34, 0.6);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 172, 193, 0.1);
+    }
+    
+    .intro p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      opacity: 0.9;
+    }
+    
+    /* Определение колокейшн */
+    .definition {
+      background: linear-gradient(135deg, rgba(0, 172, 193, 0.1) 0%, rgba(57, 73, 171, 0.1) 100%);
+      padding: 30px;
+      border-radius: 15px;
+      margin-bottom: 40px;
+      border: 1px solid rgba(0, 172, 193, 0.3);
+    }
+    
+    .definition h3 {
+      color: #00acc1;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+    
+    /* Грид с карточками */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .card {
+      background: rgba(22, 27, 34, 0.8);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-2);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 172, 193, 0.3);
+      border-color: rgba(0, 172, 193, 0.5);
+    }
+    
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .card-content {
+      padding: 40px 30px;
+    }
+    
+    .card-number {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-2);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.25rem;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(0, 172, 193, 0.3);
+    }
+    
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+      color: var(--text-light);
+    }
+    
+    .card p {
+      opacity: 0.8;
+      font-size: 0.95rem;
+    }
+    
+    /* Футер */
+    footer {
+      background: rgba(13, 17, 23, 0.8);
+      backdrop-filter: blur(20px);
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 100px;
+    }
+    
+    footer p {
+      opacity: 0.7;
+    }
+    
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      header {
+        padding: 50px 20px;
+      }
+      
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .intro {
+        padding: 25px;
+      }
+    }
+    
+    /* Анимация появления */
+    .fade-in {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+    .card:nth-child(4) { animation-delay: 0.4s; }
+    .card:nth-child(5) { animation-delay: 0.5s; }
+    .card:nth-child(6) { animation-delay: 0.6s; }
+  </style>
+</head>
 <body>
-  <header class="header"><div class="container hero">
-    <h1 class="h1">Новая услуга: колокейшн на подстанциях</h1>
-    <p class="lead">Инфраструктура для операторов связи на базе энергетических объектов. Стандарты безопасности энергосистемы, прозрачный прайс и понятные регламенты.</p>
-    <div class="nav">
-      <a class="btn" href="glossary.html">1. Термины и законы</a>
-      <a class="btn" href="roadmap.html">2. Дорожная карта</a>
-      <a class="btn" href="templates.html">3. Шаблоны документов</a>
-      <a class="btn" href="pricing.html">4. Прейскурант и бандлы</a>
-      <a class="btn" href="presentation.html">5. Площадки и слоты</a>
-      <a class="btn ghost" href="business.html">6. Краткий бизнес‑план</a>
+  <div class="bg-animation"></div>
+  
+  <header>
+    <div class="electric-grid">
+      <div class="electric-line"></div>
+      <div class="electric-line"></div>
+      <div class="electric-line"></div>
     </div>
-  </div></header>
-  <main class="container">
-    <div class="grid cards">
-      <section class="card">
-        <h3>Что такое «колокейшн»?</h3>
-        <p>Это размещение и подключение телеком‑оборудования клиента в специально подготовленной «белой зоне» сетевой компании: стойки, электропитание, климат, кросс‑подключения и регламентированный доступ.</p>
-        <p class="small">Зона отделена от АСУ ТП и РЗА и соответствует ПУЭ/ПТЭЭП/КИИ.</p>
-      </section>
-      <section class="card">
-        <h3>Кому подходит</h3>
-        <ul class="small"><li>Операторы связи (магистраль/доступ, DPI или BNG)</li><li>Региональные интеграторы и CCTV</li><li>Клиенты, кому нужен узел ближе к потребителю</li></ul>
-      </section>
-      <section class="card">
-        <h3>Как это работает</h3>
-        <p class="small">Подача заявки → согласование доступа → монтаж по чек‑листам → приёмка → тарификация по юнитам, мощности (кВт) и сервисам. Управление через <b>систему автоматизации заявок</b>.</p>
-      </section>
+    <h1>Колокейшн на подстанциях</h1>
+    <p>Инновационная услуга размещения телекоммуникационного оборудования на энергетических объектах АО «Россети Кубань»</p>
+  </header>
+  
+  <main>
+    <section class="intro fade-in">
+      <div class="definition">
+        <h3>Что такое колокейшн?</h3>
+        <p><strong>Колокейшн</strong> (от англ. colocation — «совместное размещение») — это услуга предоставления физического пространства, электропитания, охлаждения и подключения к каналам связи для размещения серверного и телекоммуникационного оборудования клиента на технической площадке провайдера услуг.</p>
+      </div>
+      <p>
+        Мы предлагаем уникальную возможность размещения вашего оборудования связи на действующих электрических подстанциях. 
+        Это решение обеспечивает надёжную инфраструктуру, бесперебойное электропитание и стратегически выгодное расположение 
+        для развёртывания сетей связи нового поколения.
+      </p>
+    </section>
+    
+    <div class="cards-grid">
+      <a href="glossary.html" class="card fade-in">
+        <div class="card-content">
+          <div class="card-number">1</div>
+          <h3>Термины и сокращения</h3>
+          <p>Полный справочник технических терминов и расшифровка аббревиатур, используемых в документации</p>
+        </div>
+      </a>
+      
+      <a href="roadmap.html" class="card fade-in">
+        <div class="card-content">
+          <div class="card-number">2</div>
+          <h3>Дорожная карта</h3>
+          <p>Поэтапный план внедрения услуги с контрольными точками и ключевыми показателями</p>
+        </div>
+      </a>
+      
+      <a href="templates.html" class="card fade-in">
+        <div class="card-content">
+          <div class="card-number">3</div>
+          <h3>Шаблоны документов</h3>
+          <p>Готовые образцы договоров, регламентов и чек-листов для организации работ</p>
+        </div>
+      </a>
+      
+      <a href="pricing.html" class="card fade-in">
+        <div class="card-content">
+          <div class="card-number">4</div>
+          <h3>Тарифы и пакеты</h3>
+          <p>Прозрачная система ценообразования с гибкими тарифными планами</p>
+        </div>
+      </a>
+      
+      <a href="substations.html" class="card fade-in">
+        <div class="card-content">
+          <div class="card-number">5</div>
+          <h3>Доступные подстанции</h3>
+          <p>Актуальный список объектов с указанием свободных мест для размещения</p>
+        </div>
+      </a>
+      
+      <a href="business-plan.html" class="card fade-in">
+        <div class="card-content">
+          <div class="card-number">6</div>
+          <h3>Бизнес-план</h3>
+          <p>Финансовая модель проекта с прогнозом выручки и сроками окупаемости</p>
+        </div>
+      </a>
     </div>
-    <div class="hr"></div>
-    <p class="small">© 2025 АО «Россети Кубань». Демо‑витрина. Оптимизировано под мобильные устройства.</p>
   </main>
-  <footer class="footer">Сделано с заботой о безопасности и прозрачности.</footer>
-</body></html>
+  
+  <footer>
+    <p>&copy; 2025 АО «Россети Кубань». Все права защищены.</p>
+  </footer>
+  
+  <script>
+    // Добавляем интерактивность
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
