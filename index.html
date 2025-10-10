@@ -12,295 +12,100 @@
     }
     
     :root {
-      --primary-color: #1a237e;
-      --secondary-color: #3949ab;
-      --accent-color: #00acc1;
-      --text-light: #ffffff;
-      --text-dark: #212121;
-      --bg-dark: #0d1117;
-      --bg-card: #161b22;
-      --gradient-1: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
-      --gradient-2: linear-gradient(135deg, #00acc1 0%, #26c6da 100%);
-      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    }
-
-    /* Floating navigation buttons */
-    .nav-buttons {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
-      display: flex;
-      gap: 15px;
-    }
-
-    .nav-buttons .nav-button {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--accent-color);
-      color: var(--text-light);
-      text-decoration: none;
-      font-size: 1.3rem;
-      box-shadow: 0 4px 20px rgba(0, 172, 193, 0.3);
-      transition: transform 0.3s ease;
-    }
-
-    .nav-buttons .nav-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(0, 172, 193, 0.5);
-    }
-
-    html {
-      scroll-behavior: smooth;
+      --primary: #0066FF;
+      --secondary: #00D4FF;
+      --accent: #FF0066;
+      --dark: #0A0E27;
+      --light: #FFFFFF;
+      --gray: #8892B0;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --border: rgba(255, 255, 255, 0.1);
     }
     
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-      background: #0a0e27;
-      color: var(--text-light);
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+      background: var(--dark);
+      color: var(--light);
       overflow-x: hidden;
-      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
     
-    /* Анимированный фон */
-    .bg-animation {
+    /* Animated Background */
+    .bg-canvas {
       position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      top: 0;
-      left: 0;
       z-index: -1;
-      background: linear-gradient(to bottom, #0a0e27 0%, #1a237e 100%);
-      overflow: hidden;
+      background: radial-gradient(circle at 20% 50%, rgba(0, 102, 255, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 20%, rgba(255, 0, 102, 0.05) 0%, transparent 50%);
     }
     
-    .bg-animation::before {
-      content: '';
-      position: absolute;
-      width: 150%;
-      height: 150%;
-      background: radial-gradient(circle at 20% 80%, rgba(0, 172, 193, 0.3) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 20%, rgba(57, 73, 171, 0.3) 0%, transparent 50%),
-                  radial-gradient(circle at 40% 40%, rgba(26, 35, 126, 0.3) 0%, transparent 50%);
-      animation: float 20s ease-in-out infinite;
-    }
-    
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) rotate(0deg); }
-      33% { transform: translate(-30px, -30px) rotate(120deg); }
-      66% { transform: translate(30px, -20px) rotate(240deg); }
-    }
-    
-    /* Хедер */
-    header {
-      position: relative;
-      padding: 80px 20px;
-      text-align: center;
-      background: rgba(26, 35, 126, 0.1);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    header h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 700;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, #ffffff 0%, #00acc1 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-shadow: 0 2px 20px rgba(0, 172, 193, 0.3);
-    }
-    
-    header p {
-      font-size: 1.25rem;
-      opacity: 0.9;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    
-    /* Электрическая сетка анимация */
-    .electric-grid {
-      position: absolute;
+    /* Navigation */
+    nav {
+      position: fixed;
       top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      overflow: hidden;
-      opacity: 0.1;
-      pointer-events: none;
+      width: 100%;
+      background: rgba(10, 14, 39, 0.8);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
     }
     
-    .electric-line {
-      position: absolute;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #00acc1, transparent);
-      animation: electric 3s linear infinite;
-    }
-    
-    .electric-line:nth-child(1) { top: 20%; width: 60%; left: -60%; animation-duration: 4s; }
-    .electric-line:nth-child(2) { top: 50%; width: 80%; right: -80%; animation-duration: 5s; animation-direction: reverse; }
-    .electric-line:nth-child(3) { top: 80%; width: 70%; left: -70%; animation-duration: 3.5s; }
-    
-    @keyframes electric {
-      to { transform: translateX(200%); }
-    }
-    
-    /* Основной контент */
-    main {
+    .nav-content {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 60px 20px;
-      position: relative;
-      z-index: 1;
+      padding: 0 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     
-    .intro {
-      text-align: center;
-      margin-bottom: 60px;
-      padding: 40px;
-      background: rgba(22, 27, 34, 0.6);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 8px 32px rgba(0, 172, 193, 0.1);
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
-    .intro p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      opacity: 0.9;
+    .menu-toggle {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      cursor: pointer;
     }
     
-    /* Определение колокейшн */
-    .definition {
-      background: linear-gradient(135deg, rgba(0, 172, 193, 0.1) 0%, rgba(57, 73, 171, 0.1) 100%);
-      padding: 30px;
-      border-radius: 15px;
-      margin-bottom: 40px;
-      border: 1px solid rgba(0, 172, 193, 0.3);
+    .menu-toggle span {
+      width: 100%;
+      height: 2px;
+      background: var(--light);
+      transition: all 0.3s ease;
     }
     
-    .definition h3 {
-      color: #00acc1;
-      margin-bottom: 15px;
-      font-size: 1.5rem;
-    }
-    
-    /* Грид с карточками */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      margin-bottom: 40px;
-    }
-    
-    .card {
-      background: rgba(22, 27, 34, 0.8);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      position: relative;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-    
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: var(--gradient-2);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
-    }
-    
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0, 172, 193, 0.3);
-      border-color: rgba(0, 172, 193, 0.5);
-    }
-    
-    .card:hover::before {
-      transform: scaleX(1);
-    }
-    
-    .card-content {
-      padding: 40px 30px;
-    }
-    
-    .card-number {
-      display: inline-block;
-      width: 50px;
-      height: 50px;
-      background: var(--gradient-2);
-      border-radius: 15px;
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: bold;
-      font-size: 1.25rem;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 20px rgba(0, 172, 193, 0.3);
+      padding: 6rem 1rem 2rem;
+      position: relative;
     }
     
-    .card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 10px;
-      color: var(--text-light);
-    }
-    
-    .card p {
-      opacity: 0.8;
-      font-size: 0.95rem;
-    }
-    
-    /* Футер */
-    footer {
-      background: rgba(13, 17, 23, 0.8);
-      backdrop-filter: blur(20px);
-      padding: 40px 20px;
+    .hero-content {
       text-align: center;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: 100px;
+      max-width: 800px;
+      animation: fadeInUp 1s ease;
     }
     
-    footer p {
-      opacity: 0.7;
-    }
-    
-    /* Адаптивность */
-    @media (max-width: 768px) {
-      header {
-        padding: 50px 20px;
-      }
-      
-      .cards-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      
-      .intro {
-        padding: 25px;
-      }
-    }
-    
-    /* Анимация появления */
-    .fade-in {
-      animation: fadeIn 0.8s ease-out forwards;
-    }
-    
-    @keyframes fadeIn {
+    @keyframes fadeInUp {
       from {
         opacity: 0;
         transform: translateY(30px);
@@ -311,113 +116,359 @@
       }
     }
     
-    .card:nth-child(1) { animation-delay: 0.1s; }
-    .card:nth-child(2) { animation-delay: 0.2s; }
-    .card:nth-child(3) { animation-delay: 0.3s; }
-    .card:nth-child(4) { animation-delay: 0.4s; }
-    .card:nth-child(5) { animation-delay: 0.5s; }
-    .card:nth-child(6) { animation-delay: 0.6s; }
+    .hero-badge {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: linear-gradient(135deg, rgba(0, 102, 255, 0.2), rgba(0, 212, 255, 0.1));
+      border: 1px solid var(--primary);
+      border-radius: 50px;
+      font-size: 0.875rem;
+      color: var(--secondary);
+      margin-bottom: 2rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.8; }
+    }
+    
+    h1 {
+      font-size: clamp(2rem, 8vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--light) 0%, var(--primary) 50%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .hero-description {
+      font-size: 1.125rem;
+      color: var(--gray);
+      margin-bottom: 3rem;
+      line-height: 1.6;
+    }
+    
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--light);
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px rgba(0, 102, 255, 0.4);
+    }
+    
+    .cta-button::after {
+      content: '→';
+      font-size: 1.25rem;
+    }
+    
+    /* Features Section */
+    .features {
+      padding: 4rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    
+    .section-badge {
+      display: inline-block;
+      padding: 0.25rem 1rem;
+      background: rgba(255, 0, 102, 0.1);
+      border: 1px solid var(--accent);
+      border-radius: 20px;
+      font-size: 0.875rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    
+    .section-title {
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+    
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 102, 255, 0.1) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+      box-shadow: 0 20px 40px rgba(0, 102, 255, 0.2);
+    }
+    
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
+    }
+    
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    
+    .card-description {
+      color: var(--gray);
+      line-height: 1.5;
+    }
+    
+    /* Definition Box */
+    .definition-box {
+      background: linear-gradient(135deg, rgba(0, 102, 255, 0.05), rgba(0, 212, 255, 0.02));
+      border: 1px solid rgba(0, 102, 255, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .definition-box h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    
+    /* Footer */
+    footer {
+      background: rgba(10, 14, 39, 0.5);
+      backdrop-filter: blur(20px);
+      padding: 3rem 1rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      margin-top: 6rem;
+    }
+    
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 14, 39, 0.98);
+      backdrop-filter: blur(20px);
+      z-index: 999;
+      padding: 5rem 2rem;
+      transition: right 0.3s ease;
+    }
+    
+    .mobile-menu.active {
+      right: 0;
+    }
+    
+    .mobile-menu-links {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    .mobile-menu-links a {
+      color: var(--light);
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    
+    .mobile-menu-links a:hover {
+      color: var(--primary);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        min-height: 100vh;
+        padding: 5rem 1rem 2rem;
+      }
+      
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .feature-card {
+        padding: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="bg-animation"></div>
+  <div class="bg-canvas"></div>
   
-  <header>
-    <div class="electric-grid">
-      <div class="electric-line"></div>
-      <div class="electric-line"></div>
-      <div class="electric-line"></div>
-    </div>
-    <h1>Колокейшн на подстанциях</h1>
-    <p>Инновационная услуга размещения телекоммуникационного оборудования на энергетических объектах АО «Россети Кубань»</p>
-  </header>
-  
-  <main>
-    <section class="intro fade-in">
-      <div class="definition">
-        <h3>Что такое колокейшн?</h3>
-        <p><strong>Колокейшн</strong> (от англ. colocation — «совместное размещение») — это услуга предоставления физического пространства, электропитания, охлаждения и подключения к каналам связи для размещения серверного и телекоммуникационного оборудования клиента на технической площадке провайдера услуг.</p>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-content">
+      <div class="logo">Россети Кубань</div>
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-      <p>
-        Мы предлагаем уникальную возможность размещения вашего оборудования связи на действующих электрических подстанциях. 
-        Это решение обеспечивает надёжную инфраструктуру, бесперебойное электропитание и стратегически выгодное расположение 
-        для развёртывания сетей связи нового поколения.
+    </div>
+  </nav>
+  
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-links">
+      <a href="#features" onclick="toggleMenu()">Услуги</a>
+      <a href="#about" onclick="toggleMenu()">О проекте</a>
+      <a href="#contact" onclick="toggleMenu()">Контакты</a>
+    </div>
+  </div>
+  
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">🚀 Инновационная услуга</div>
+      <h1>Колокейшн на подстанциях</h1>
+      <p class="hero-description">
+        Размещение телекоммуникационного оборудования на энергетических объектах 
+        АО «Россети Кубань» с гарантированным электропитанием и современной инфраструктурой
       </p>
-    </section>
+      <a href="#features" class="cta-button">Начать работу</a>
+    </div>
+  </section>
+  
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="section-header">
+      <div class="section-badge">Наши услуги</div>
+      <h2 class="section-title">Всё для вашего бизнеса</h2>
+    </div>
+    
+    <div class="definition-box">
+      <h3>Что такое колокейшн?</h3>
+      <p><strong>Колокейшн</strong> — это услуга предоставления физического пространства, электропитания, 
+      охлаждения и подключения к каналам связи для размещения серверного и телекоммуникационного 
+      оборудования клиента на технической площадке провайдера услуг.</p>
+    </div>
     
     <div class="cards-grid">
-      <a href="glossary.html" class="card fade-in">
-        <div class="card-content">
-          <div class="card-number">1</div>
-          <h3>Термины и сокращения</h3>
-          <p>Полный справочник технических терминов и расшифровка аббревиатур, используемых в документации</p>
-        </div>
+      <a href="glossary.html" class="feature-card">
+        <div class="card-icon">📚</div>
+        <h3 class="card-title">Термины и сокращения</h3>
+        <p class="card-description">Полный справочник технических терминов и расшифровка аббревиатур</p>
       </a>
       
-      <a href="roadmap.html" class="card fade-in">
-        <div class="card-content">
-          <div class="card-number">2</div>
-          <h3>Дорожная карта</h3>
-          <p>Поэтапный план внедрения услуги с контрольными точками и ключевыми показателями</p>
-        </div>
+      <a href="roadmap.html" class="feature-card">
+        <div class="card-icon">🗺️</div>
+        <h3 class="card-title">Дорожная карта</h3>
+        <p class="card-description">Поэтапный план внедрения услуги с контрольными точками</p>
       </a>
       
-      <a href="templates.html" class="card fade-in">
-        <div class="card-content">
-          <div class="card-number">3</div>
-          <h3>Шаблоны документов</h3>
-          <p>Готовые образцы договоров, регламентов и чек-листов для организации работ</p>
-        </div>
+      <a href="templates.html" class="feature-card">
+        <div class="card-icon">📄</div>
+        <h3 class="card-title">Шаблоны документов</h3>
+        <p class="card-description">Готовые образцы договоров, регламентов и чек-листов</p>
       </a>
       
-      <a href="pricing.html" class="card fade-in">
-        <div class="card-content">
-          <div class="card-number">4</div>
-          <h3>Тарифы и пакеты</h3>
-          <p>Прозрачная система ценообразования с гибкими тарифными планами</p>
-        </div>
+      <a href="pricing.html" class="feature-card">
+        <div class="card-icon">💳</div>
+        <h3 class="card-title">Тарифы и пакеты</h3>
+        <p class="card-description">Прозрачная система ценообразования с гибкими планами</p>
       </a>
       
-      <a href="substations.html" class="card fade-in">
-        <div class="card-content">
-          <div class="card-number">5</div>
-          <h3>Доступные подстанции</h3>
-          <p>Актуальный список объектов с указанием свободных мест для размещения</p>
-        </div>
+      <a href="substations.html" class="feature-card">
+        <div class="card-icon">📍</div>
+        <h3 class="card-title">Доступные подстанции</h3>
+        <p class="card-description">Актуальный список объектов для размещения оборудования</p>
       </a>
       
-      <a href="business-plan.html" class="card fade-in">
-        <div class="card-content">
-          <div class="card-number">6</div>
-          <h3>Бизнес-план</h3>
-          <p>Финансовая модель проекта с прогнозом выручки и сроками окупаемости</p>
-        </div>
+      <a href="business-plan.html" class="feature-card">
+        <div class="card-icon">📈</div>
+        <h3 class="card-title">Бизнес-план</h3>
+        <p class="card-description">Финансовая модель проекта с прогнозом окупаемости</p>
       </a>
     </div>
-  </main>
+  </section>
   
   <footer>
     <p>&copy; 2025 АО «Россети Кубань». Все права защищены.</p>
   </footer>
-
-  <!-- Floating navigation buttons -->
-  <div class="nav-buttons">
-    <a href="javascript:void(0);" class="nav-button" aria-label="Назад" onclick="window.history.back(); return false;">←</a>
-    <a href="#" class="nav-button" aria-label="Вверх" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">↑</a>
-  </div>
   
   <script>
-    // Добавляем интерактивность
-    document.addEventListener('DOMContentLoaded', () => {
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card => {
-        card.addEventListener('mouseenter', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          card.style.setProperty('--mouse-x', `${x}px`);
-          card.style.setProperty('--mouse-y', `${y}px`);
-        });
+    // Mobile menu toggle
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('active');
+    }
+    
+    // Card hover effect
+    document.querySelectorAll('.feature-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--mouse-x', `${x}%`);
+        card.style.setProperty('--mouse-y', `${y}%`);
+      });
+    });
+    
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       });
     });
   </script>
